@@ -1,0 +1,11 @@
+image: node:latest
+
+cache:
+  paths:
+  - node_modules/
+
+clean_build:
+  script:
+   - npm install
+   - npm run clean:build:prod
+  stage: build

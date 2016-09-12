@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%- webpackConfig.metadata.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,700">
+    <base href="<%- webpackConfig.metadata.baseUrl %>">
+    <!-- imported CSS are concatenated and added automatically -->
+    <script src="config/app-config.js"></script>
+</head>
+<body ng-cloak layout="column" ng-controller="AppController as app">
+<md-toolbar layout="row" class="md-toolbar-tools">
+    <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()"
+               aria-label="Show User List">
+        <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h1>Angular webpack skeleton</h1>
+</md-toolbar>
+<div flex layout="row">
+    <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
+                md-component-id="left" ng-click="app.toggleList()">
+        <users-list
+            users="app.users"
+            selected="app.selected"
+            on-selected="app.selectUser(user)">
+        </users-list>
+    </md-sidenav>
+    <md-content flex id="content">
+        <h1>Details</h1>
+    </md-content>
+</div>
+</body>
+<% if (webpackConfig.metadata.ENV === 'dev') { %>
+<!-- Webpack Dev Server reload -->
+<script src="/webpack-dev-server.js"></script>
+<% } %>
+</body>
+</html>
